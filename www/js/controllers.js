@@ -31,7 +31,7 @@ angular.module('starter.controllers', [])
     .attr("cx", function(d) { return width/2 ; })
     .attr("r", function(d) {return d/5;})
     .on("click", function() {
-      d3.selectAll('.circle').each(pulse);
+      svg.selectAll('.circle').each(pulse);
       return true;
     });
 
@@ -95,17 +95,17 @@ angular.module('starter.controllers', [])
       }
     },
     end: function(){
-      d3.selectAll('.circle').each(buildPulse(highestForce/(force||1)));
+      svg.selectAll('.circle').each(buildPulse(highestForce/(force||1)));
       highestForce = 0;
     },
     unsupported: function(){
       console.log("Unsupported");
-      d3.selectAll('.circle').each(buildPulse(2000));
+      svg.selectAll('.circle').each(buildPulse(2000));
     }
   });
 
   function buildPulse(speed) {
-    function pulse(d, i) {
+    return function pulse(d, i) {
       var circleIndex = i;
       d3.select(this).transition()
         .duration(speed)
