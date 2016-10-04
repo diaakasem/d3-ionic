@@ -32,17 +32,35 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $stateProvider
 
   // setup an abstract state for the tabs directive
-  .state('main', {
-    url: '/',
+  .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  })
+
+  // Each tab has its own nav history stack:
+
+  .state('tab.no_pressure', {
+    url: '/no-pressure',
     views: {
-      'main': {
-        templateUrl: 'templates/main.html',
-        controller: 'MainCtrl'
+      'tab-no-pressure': {
+        templateUrl: 'templates/tab-no-pressure.html',
+        controller: 'NoPressureCtrl'
+      }
+    }
+  })
+
+  .state('tab.with_pressure', {
+    url: '/with-pressure',
+    views: {
+      'tab-with-pressure': {
+        templateUrl: 'templates/tab-with-pressure.html',
+        controller: 'WithPressureCtrl'
       }
     }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/tab/no-pressure');
 
 });
